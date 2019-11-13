@@ -37,8 +37,21 @@ var getStatusCodeAsync = function(url) {
   }).then(statusCode => statusCode);
 };
 
+var writeFileAsync = function(filePath, textData) {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filePath, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(JSON.stringify(textData));
+      }
+    });
+  }).then(text => text);
+};
+
 // Export these functions so we can test them and reuse them in later exercises
 module.exports = {
   getStatusCodeAsync: getStatusCodeAsync,
-  pluckFirstLineFromFileAsync: pluckFirstLineFromFileAsync
+  pluckFirstLineFromFileAsync: pluckFirstLineFromFileAsync,
+  writeFileAsync: writeFileAsync
 };
